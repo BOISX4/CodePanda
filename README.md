@@ -20,6 +20,11 @@ $ source virtualenv/bin/activate
 $ virtualenv\Scripts\activate
 ```  
 
+## Installing Requirements
+```
+$ pip install -r requirements.txt
+```
+
 ## Running the Local Server
 ```
 $ python manage.py runserver
