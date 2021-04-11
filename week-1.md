@@ -8,7 +8,7 @@ Most of the time was spent on learning *Django*
 |Homepage Template          |In progess                     |April 12                     |Dhanush          |
 |Question and Answer Model  |In progess                     |April 17                     |Jeethendra       |
 |Question and Answer Model  |In progess                     |April 17                     |Sharook          |
-|User Creation              |Completed                      |April 11                     |Karthik          | 
+|User Creation              |In progess                     |April 15                     |Karthik          | 
 
 # Minutes of Meeting
 
