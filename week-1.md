@@ -10,6 +10,11 @@ Most of the time was spent on learning *Django*
 |Question and Answer Model  |In progess                     |April 17                     |Sharook          |
 |User Creation              |In progess                     |April 15                     |Karthik          | 
 
+# Design Diagram
+
+![design diagram](./images/version1.png)
+
+
 # Minutes of Meeting
 
 Meeting #1
@@ -30,3 +35,6 @@ Absent: Sharook
 -> Resolving Git and GitHub doubts
 -> UI for the homepage
 -> How to implement 'Tags' in application
+
+
+
