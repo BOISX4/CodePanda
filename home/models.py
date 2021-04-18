@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
-
+# from django.contrib.auth.models import User
 # Create your models here.
 class Question(models.Model):
     title = models.CharField(max_length=100)
@@ -11,7 +11,7 @@ class Question(models.Model):
     votes = models.IntegerField(default=0)
     user_ques = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     tags_ques = ArrayField(models.CharField(max_length=30), blank=True, null=True)
-
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.title
 
