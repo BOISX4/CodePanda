@@ -4,12 +4,12 @@
 ```
 mkdir project
 cd project
-git clone https://github.com/JeeBoomBoi/CodePanda.git
+git clone https://github.com/BOISX4/CodePanda.git
 ```  
 
 ## Creating the Virtual Environment
 ```
-python3 -m venv virtualenv
+$ python3 -m venv virtualenv
 ```
 ## Activating the Virual Environment
 ```
