@@ -7,7 +7,7 @@ Absent: None
 
 Meeting #2 Date: 18 April, 2021  
 Duration: 3 hour (10 am to 1 pm)  
-Present: Dhanush, Sharook
+Present: Dhanush, Sharook    
 Absent: None
 
 Agenda
