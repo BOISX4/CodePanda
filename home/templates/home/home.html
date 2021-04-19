@@ -1,16 +1,38 @@
 {% extends "home/base.html" %}
 {% block content %}
-<!-- <h1>Home Page</h1> -->
-{% for post in posts %}
+{% for ques in questions %}
 <article class="media content-section">
-	<img class="rounded-circle article-img" src = "{{post.author.profile.image.url}}">
+    <img class="rounded-circle article-img" src="{{  ques.user_ques.profile.image.url  }}">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ post.question }}</a>
-            <small class="text-muted">{{post.data_posted }}</small>
+            <a class="mr-2" href="#">{{ ques.title }}</a>
+            <small class="text-muted">{{ ques.date_posted | date:"F d, Y" }}</small>
         </div>
-        <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-        <!-- <p class="article-content">{{ post.content }}</p> -->
+        <h2><a class="article-title" href="#">{{ ques.question }}</a></h2>
+        {% for answer in ques.answer_set.all %}
+            <article class="media">
+            <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ answer.user_ans|title }}</a>
+                    <small class="text-muted">{{ answer.date_posted | date:"F d, Y" }}</small>
+                </div>
+                
+            <div class="row mt-3">                            
+                <div class="col-md-1" style="font-size: 20px; color:#606060; text-align: center;">
+                    <i class="fa fa-arrow-up"></i>                    
+                    <span>{{ answer.votes }}</span>
+                    <i class="fa fa-arrow-down"></i>                    
+                </div>
+
+                <article class="media content-section col-md-10">
+                    <pre class="prettyprint pp">{{ answer.answer }}</pre>
+                </article>
+                
+            </div>          
+       
+        </article>
+         {% endfor %}
     </div>
 </article>
 
