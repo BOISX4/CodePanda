@@ -42,7 +42,7 @@
     <div class="container-bg">
     <main role="main" class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-{{message.tags}}">
@@ -52,7 +52,7 @@
                 {% endif %}
                 {% block content %}{% endblock %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="content-section">
                     <p class='text-muted'>Hot Stuff
                     <ul class="list-group">
@@ -79,6 +79,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
 </body>
 

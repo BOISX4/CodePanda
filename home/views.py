@@ -6,7 +6,7 @@ from .models import Question
 
 def home(request):
     context = {
-        'posts': Question.objects.all()
+        'questions': Question.objects.all()
     }
     return render(request, 'home/home.html', context)
 
