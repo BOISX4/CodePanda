@@ -15,5 +15,5 @@ Agenda
 -> Refering Django Documentation  
 -> Creating Login and Logout System and adding basic user profile - assigned to Karthik        
 -> Major UI changes, editing questions and answers model, adding tags to questions - assigned to Jeethendra  
--> Making fetching from DB work, create and delete post and UI changes   - assigned to Karthik  
+-> Making fetching from DB work, create and delete post and UI changes   - assigned to Dhanush  
 -> Adding User Profile Functionalities,adding a new styling library - assigned to Sharook
