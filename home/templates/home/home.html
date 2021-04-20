@@ -2,13 +2,13 @@
 {% block content %}
 {% for ques in questions %}
 <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{  ques.user_ques.profile.image.url  }}">
+    <img class="rounded-circle article-img" src="{{ ques.user_ques.profile.image.url }}">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ ques.title }}</a>
+            <a class="mr-2 article-title" href="#">{{ ques.title }}</a>
             <small class="text-muted">{{ ques.date_posted | date:"F d, Y" }}</small>
         </div>
-        <h2><a class="article-title" href="#">{{ ques.question }}</a></h2>
+        <h2><p class="article-content" href="#">{{ ques.question }}</p></h2>
         {% for answer in ques.answer_set.all %}
             <article class="media">
             <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
