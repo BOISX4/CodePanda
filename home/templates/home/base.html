@@ -7,13 +7,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'home/images/favicon-32x32.png' %}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'home/main.css' %}">
-
     {% if title %}
     <title>CodePanda - {{ title }}</title>
     {% else %}
@@ -24,7 +23,7 @@
 
 <body>
     <header>
-        <img class="logo" src="{% static 'home/images/logo-cropped.png' %}" alt="logo">
+        <a href= "/"><img class="logo" src="{% static 'home/images/logo-cropped.png' %}" alt="logo"></a>
         <nav>
             <ul class="nav_links">
                 {% if user.is_authenticated %}
