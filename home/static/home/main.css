@@ -101,6 +101,7 @@ ul {
 }
 
 .article-title {
+  font-size: 125%;
   color: #edf0f1;
 }
 
@@ -122,6 +123,7 @@ a.article-title:hover {
 }
 
 .article-metadata {
+  display: flex;
   padding-bottom: 1px;
   margin-bottom: 4px;
   border-bottom: 1px solid #e3e3e3
@@ -151,4 +153,22 @@ a.article-title:hover {
 
 .pp {
   color: white;
+}
+
+.date {
+  margin-top: auto;
+  margin-left: auto;
+}
+
+.arrow-style {
+  font-size: 20px;
+  color:#606060;
+  text-align: center;
+}
+
+a.btn.btn-primary {
+  margin-left: 0px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  font-size: 12px;
 }
