@@ -50,7 +50,7 @@ header {
   color: #0088a9;
 }
 
-button {
+.post-button {
   margin-left: 20px;
   padding: 9px 25px;
   background-color: rgba(0, 136, 169, 1);
@@ -60,8 +60,8 @@ button {
   transition: all 0.3 ease 0s;
 }
 
-button:hover {
-  background-color: rgba(0, 136, 169, 0.8);
+.post-button:hover {
+  background-color: rgba(0, 136, 169, 0.8); */
 }
 
 /* h1, h2, h3, h4, h5, h6 {
@@ -100,9 +100,16 @@ ul {
   margin-bottom: 20px;
 }
 
+.answer-section {
+  background: #24252A;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
 .article-title {
-  font-size: 125%;
+  font-size: 150%;
   color: #edf0f1;
+  margin-bottom: auto;
 }
 
 a.article-title:hover {

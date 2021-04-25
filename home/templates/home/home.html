@@ -5,12 +5,12 @@
     <img class="rounded-circle article-img" src="{{ question.user_ques.profile.image.url }}">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2 article-title" href="#">{{ question.title }}</a>
-            <small class="text-muted mt-auto">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
+            <a class="mr-2 article-title" href="{% url 'question-detail' question.id %}">{{ question.title }}</a>
+            <small class="text-muted mt-2">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
             <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
         </div>
 
-        <p class="article-content" href="#">{{ question.question }}</p>
+        <p class="article-content">{{ question.question }}</p>
         {% for tag in question.tags_ques %}
             <a class="btn btn-primary" href="#" role="button">{{ tag }}</a>
         {% endfor %}
@@ -31,7 +31,7 @@
                         <i class="fa fa-arrow-down"></i>
                     </div>
 
-                    <article class="media content-section col-md-10">
+                    <article class="media answer-section col-md-11">
                         <pre class="prettyprint pp">{{ answer.answer }}</pre>
                     </article>
 

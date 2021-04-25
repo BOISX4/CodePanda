@@ -3,8 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.http import HttpResponse
 from .models import Question
 from .models import Answer
-from django.contrib.auth.mixins import LoginRequiredMixin
-#  UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def home(request):
     context = {
@@ -24,36 +23,36 @@ class QuestionDetailView(DetailView):
 
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
-    fields =['title', 'question']
+    fields =['title', 'question', 'tags_ques']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.user_ques = self.request.user
         return super().form_valid(form)
 
-class QuestionUpdateView(LoginRequiredMixin, UpdateView):
+class QuestionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Question
-    fields =['title', 'question']
+    fields =['title', 'question', 'tags_ques']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.user_ques = self.request.user
         return super().form_valid(form)
      
-    # def test_func(self):
-    #     question = self.get_object()
-    #     if self.request.user == question.user_ques:
-    #         return True
-    #     return False
+    def test_func(self):
+        question = self.get_object()
+        if self.request.user == question.user_ques:
+            return True
+        return False
 
-# class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-#     model = Question
+class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Question
+    success_url = '/'
 
-#     def test_func(self):
-#         question = self.get_object()
-#         if self.request.user == question.user_ques:
-#             return True
-#         return False
+    def test_func(self):
+        question = self.get_object()
+        if self.request.user == question.user_ques:
+            return True
+        return False
 
 def about(request):
     return render(request, 'home/about.html', {'title': 'about'})
 
-# UserPassesTestMixin

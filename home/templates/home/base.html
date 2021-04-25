@@ -27,6 +27,7 @@
         <nav>
             <ul class="nav_links">
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'question-create' %}"><button class="post-button">Post a Question</button></a><li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}

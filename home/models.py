@@ -12,7 +12,7 @@ class Question(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     votes = models.IntegerField(default=0)
     user_ques = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    tags_ques = ArrayField(models.CharField(max_length=30), blank=True, null=True)
+    tags_ques = ArrayField(models.CharField(max_length=30), blank=True, null=True, verbose_name='Tags for Question')
 
 
     def __str__(self):
