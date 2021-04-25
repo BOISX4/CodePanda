@@ -2,19 +2,19 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css");
 
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0; */
   background-color: #24252A;
   color: #edf0f1;
+  font-family: "Montserrat", sans-serif;
 }
 
 li, a, button, p {
-  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
   color: #edf0f1;
-  /* text-decoration: none; */
+  text-decoration: none;
 }
 
 header {
@@ -50,7 +50,7 @@ header {
   color: #0088a9;
 }
 
-button {
+.post-button {
   margin-left: 20px;
   padding: 9px 25px;
   background-color: rgba(0, 136, 169, 1);
@@ -60,8 +60,8 @@ button {
   transition: all 0.3 ease 0s;
 }
 
-button:hover {
-  background-color: rgba(0, 136, 169, 0.8);
+.post-button:hover {
+  background-color: rgba(0, 136, 169, 0.8); */
 }
 
 /* h1, h2, h3, h4, h5, h6 {
@@ -100,8 +100,16 @@ ul {
   margin-bottom: 20px;
 }
 
+.answer-section {
+  background: #24252A;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
 .article-title {
+  font-size: 150%;
   color: #edf0f1;
+  margin-bottom: auto;
 }
 
 a.article-title:hover {
@@ -122,6 +130,7 @@ a.article-title:hover {
 }
 
 .article-metadata {
+  display: flex;
   padding-bottom: 1px;
   margin-bottom: 4px;
   border-bottom: 1px solid #e3e3e3
@@ -151,4 +160,22 @@ a.article-title:hover {
 
 .pp {
   color: white;
+}
+
+.date {
+  margin-top: auto;
+  margin-left: auto;
+}
+
+.arrow-style {
+  font-size: 20px;
+  color:#606060;
+  text-align: center;
+}
+
+a.btn.btn-primary {
+  margin-left: 0px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  font-size: 12px;
 }

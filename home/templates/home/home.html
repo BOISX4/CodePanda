@@ -1,33 +1,37 @@
 {% extends "home/base.html" %}
 {% block content %}
-{% for ques in questions %}
+{% for question in questions %}
 <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ ques.user_ques.profile.image.url }}">
+    <img class="rounded-circle article-img" src="{{ question.user_ques.profile.image.url }}">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2 article-title" href="#">{{ ques.title }}</a>
-            <small class="text-muted">{{ ques.date_posted | date:"F d, Y" }}</small>
+            <a class="mr-2 article-title" href="{% url 'question-detail' question.id %}">{{ question.title }}</a>
+            <small class="text-muted mt-2">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
+            <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
         </div>
-        <h2>
-            <p class="article-content" href="#">{{ ques.question }}</p>
-        </h2>
-        {% for answer in ques.answer_set.all %}
+
+        <p class="article-content">{{ question.question }}</p>
+        {% for tag in question.tags_ques %}
+            <a class="btn btn-primary" href="#" role="button">{{ tag }}</a>
+        {% endfor %}
+
+        {% for answer in question.answer_set.all %}
         <article class="media">
             <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
             <div class="media-body">
                 <div class="article-metadata">
                     <a class="mr-2" href="#">{{ answer.user_ans|title }}</a>
-                    <small class="text-muted">{{ answer.date_posted | date:"F d, Y" }}</small>
+                    <small class="text-muted date">{{ answer.date_posted | date:"F d, Y" }}</small>
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-md-1" style="font-size: 20px; color:#606060; text-align: center;">
+                    <div class="col-md-1 arrow-style">
                         <i class="fa fa-arrow-up"></i>
                         <span>{{ answer.votes }}</span>
                         <i class="fa fa-arrow-down"></i>
                     </div>
 
-                    <article class="media content-section col-md-10">
+                    <article class="media answer-section col-md-11">
                         <pre class="prettyprint pp">{{ answer.answer }}</pre>
                     </article>
 
