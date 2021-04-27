@@ -1,21 +1,26 @@
 {% extends "home/base.html" %}
 {% block content %}
-{% for question in questions %}
 <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ question.user_ques.profile.image.url }}">
+    <img class="rounded-circle article-img" src="{{ object.user_ques.profile.image.url }}">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2 article-title" href="{% url 'question-detail' question.id %}">{{ question.title }}</a>
-            <small class="text-muted mt-2">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
-            <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
+            <h2 class="mr-2 article-title">{{ object.title }}</h2>
+            <small class="text-muted mt-auto">Posted by <a href="#">{{ object.user_ques | title }}</a></small>
+            <small class="text-muted date">{{ object.date_posted | date:"F d, Y" }}</small>
         </div>
+        {% if object.user_ques == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'question-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'question-delete' object.id %}">Delete</a>
+            </div>
+        {% endif %}
 
-        <p class="article-content">{{ question.question }}</p>
-        {% for tag in question.tags_ques %}
+        <p class="article-content" href="#">{{ object.question }}</p>
+        {% for tag in object.tags_ques %}
             <a class="btn btn-primary" href="#" role="button">{{ tag }}</a>
         {% endfor %}
 
-        {% for answer in question.answer_set.all %}
+        {% for answer in object.answer_set.all %}
         <article class="media">
             <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
             <div class="media-body">
@@ -31,7 +36,7 @@
                         <i class="fa fa-arrow-down"></i>
                     </div>
 
-                    <article class="media answer-section col-md-11">
+                    <article class="media content-section col-md-10">
                         <pre class="prettyprint pp">{{ answer.answer }}</pre>
                     </article>
 
@@ -41,6 +46,4 @@
         {% endfor %}
     </div>
 </article>
-
-{% endfor %}
 {% endblock content %}

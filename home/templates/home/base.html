@@ -7,13 +7,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'home/images/favicon-32x32.png' %}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'home/main.css' %}">
-
     {% if title %}
     <title>CodePanda - {{ title }}</title>
     {% else %}
@@ -24,10 +23,11 @@
 
 <body>
     <header>
-        <img class="logo" src="{% static 'home/images/logo-cropped.png' %}" alt="logo">
+        <a href= "/"><img class="logo" src="{% static 'home/images/logo-cropped.png' %}" alt="logo"></a>
         <nav>
             <ul class="nav_links">
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'question-create' %}"><button class="post-button">Post a Question</button></a><li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}
@@ -35,6 +35,11 @@
                     <li><a href="{% url 'register' %}">Register</a></li>
                 {% endif %}
             </ul>
+            <form class = "d-flex" method="POST" action="{% url 'search-title' %}">
+                {% csrf_token %}
+                <input name="searched" class ="form-control me-2" type="search" placeholder="search title">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
         </nav>
     </header>
 
@@ -42,7 +47,7 @@
     <div class="container-bg">
     <main role="main" class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-{{message.tags}}">
@@ -52,16 +57,18 @@
                 {% endif %}
                 {% block content %}{% endblock %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                {% if user.is_authenticated %}
                 <div class="content-section">
-                    <p class='text-muted'>Hot Stuff
+                    <p class='text-muted d-flex justify-content-center'>Hot Stuff
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-dark">Latest Posts</li>
+                        <li class="list-group-item list-group-item-dark">Popular Questions</li>
+                        <li class="list-group-item list-group-item-dark">Top Users</li>
                         <li class="list-group-item list-group-item-dark">Announcements</li>
-                        <li class="list-group-item list-group-item-dark">Calendars</li>
                     </ul>
                     </p>
                 </div>
+                {% endif %}
             </div>
         </div>
     </main>
@@ -79,6 +86,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
 </body>
 
