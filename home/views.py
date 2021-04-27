@@ -5,6 +5,21 @@ from .models import Question
 from .models import Answer
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+
+def search_title(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        questions = Question.objects.filter(title__contains=searched )
+        return render(request, 'home/search_title.html', {'searched': searched,'questions':questions})
+    else:
+        return render(request, 'home/search_title.html', {})
+
+
+    
+
+
+
+
 def home(request):
     context = {
         'questions': Question.objects.all()
