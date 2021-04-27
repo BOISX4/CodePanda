@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils import timezone
-from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
+from django.urls import reverse
+
 
 # Create your models here.
 class Question(models.Model):
@@ -9,19 +11,23 @@ class Question(models.Model):
     question = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     votes = models.IntegerField(default=0)
-    user_ques = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
-    tags_ques = ArrayField(models.CharField(max_length=30), blank=True, null=True)
+    user_ques = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    tags_ques = ArrayField(models.CharField(max_length=30), blank=True, null=True, verbose_name='Tags for Question')
+
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('question-detail', kwargs={'pk': self.pk})
+
 
 class Answer(models.Model):
     answer = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     votes = models.IntegerField(default=0)
     answer_for_ques = models.ForeignKey(Question, on_delete=models.CASCADE)
-    user_ans = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
-    # tags_answer = ArrayField(models.CharField(max_length=30), blank=True, null=True)
+    user_ans = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.answer
