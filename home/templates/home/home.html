@@ -3,7 +3,8 @@
 <!-- <h1>Home Page</h1> -->
 {% for post in posts %}
 <article class="media content-section">
-	<img class="rounded-circle article-img" src = "{{post.author.profile.image.url}}">
+	<img class="rounded-circle article-img" src = "{{ post.user_ques.profile.image.url }}">
+	<h1>{{ post.user_ques.profile.image.url }}</h1>
     <div class="media-body">
         <div class="article-metadata">
             <a class="mr-2" href="#">{{ post.question }}</a>
