@@ -26,8 +26,14 @@ class Answer(models.Model):
     answer = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     votes = models.IntegerField(default=0)
+    vote_ans = models.ManyToManyField(User, related_name='vote_ans', default=None, blank=True)
     answer_for_ques = models.ForeignKey(Question, on_delete=models.CASCADE)
     user_ans = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.answer
+
+class VoteAnswer(models.Model):
+    answer = models.ForeignKey(Answer, related_name='answerid', on_delete=models.CASCADE, default=None, blank=True)
+    user = models.ForeignKey(User, related_name='userid', on_delete=models.CASCADE, default=None, blank=True)
+    vote = models.BooleanField(default=True)

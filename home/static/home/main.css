@@ -179,3 +179,12 @@ a.btn.btn-primary {
   border-radius: 20px;
   font-size: 12px;
 }
+
+.voting {
+  font-size: 20px;
+}
+
+.voting i:hover {
+  color: #428bca;
+  text-decoration: none;
+}
