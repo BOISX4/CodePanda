@@ -26,9 +26,9 @@
 
                 <div class="row mt-3">
                     <div class="col-md-1 arrow-style">
-                        <a class="voting" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
-                        <span>{{ answer.votes }}</span>
-                        <a class="voting" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
+                        <a class="voting voteaction" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
+                        <span id="votes">{{ answer.votes }}</span>
+                        <a class="voting voteaction" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
                     </div>
 
                     <article class="media answer-section col-md-11">
@@ -61,6 +61,10 @@
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
       {% endif %}
+{% endif %}
 
-    {% endif %}
+<script>
+  $(document).ready(function)
+</script>
+
 {% endblock content %}
