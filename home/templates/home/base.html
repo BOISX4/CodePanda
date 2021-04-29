@@ -38,6 +38,11 @@
                     <li><a href="{% url 'register' %}">Register</a></li>
                 {% endif %}
             </ul>
+            <form class = "d-flex" method="POST" action="{% url 'search-title' %}">
+                {% csrf_token %}
+                <input name="searched" class ="form-control me-2" type="search" placeholder="search title">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
         </nav>
     </header>
 

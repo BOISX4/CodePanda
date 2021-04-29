@@ -9,6 +9,21 @@ from django.db.models import F
 from django.db.models import Q
 from django.http import JsonResponse
 
+
+def search_title(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        questions = Question.objects.filter(title__contains=searched )
+        return render(request, 'home/search_title.html', {'searched': searched,'questions':questions})
+    else:
+        return render(request, 'home/search_title.html', {})
+
+
+    
+
+
+
+
 def home(request):
     context = {
         'questions': Question.objects.all()
