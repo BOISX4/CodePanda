@@ -37,3 +37,6 @@ class VoteAnswer(models.Model):
     answer = models.ForeignKey(Answer, related_name='answerid', on_delete=models.CASCADE, default=None, blank=True)
     user = models.ForeignKey(User, related_name='userid', on_delete=models.CASCADE, default=None, blank=True)
     vote = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user + " voted for " + str(answer.id) + " as " + str(vote)

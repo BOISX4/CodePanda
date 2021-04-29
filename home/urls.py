@@ -10,5 +10,6 @@ urlpatterns = [
     path('question/<int:pk>/delete/', QuestionDeleteView.as_view(), name='question-delete'),
     path('question/new/', QuestionCreateView.as_view(), name='question-create'),
     path('about/', views.about, name='home-about'),
+    path('voteans/', views.voteans, name='voteans')
 ]
 

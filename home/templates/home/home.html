@@ -25,9 +25,10 @@
                 </div>
 
                 <div class="row mt-3">
+                  <span id="votes" data-value="{{ answer.id }}"></span>
                     <div class="col-md-1 arrow-style">
                         <a class="voting voteaction" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
-                        <span id="votes">{{ answer.votes }}</span>
+                        <span id="votes_for_answer">{{ answer.votes }}</span>
                         <a class="voting voteaction" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
                     </div>
 
@@ -63,8 +64,28 @@
       {% endif %}
 {% endif %}
 
-<script>
-  $(document).ready(function)
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.voteaction').on("click", function (e) {
+      e.preventDefault();
+      var answerid = document.getElementById('votes').getAttribute('data-value');
+      var button = $(this).attr("value");
+      $.ajax({
+        type: 'POST',
+        url: {% url 'voteans' %},
+        data: {
+          answerid: answerid,
+          csrfmiddlewaretoken: '{{ csrf_token }}',          
+          action: 'votes',
+          button: button
+        },
+        success: function (json) {
+          document.getElementById("votes_for_answer").innerHTML = json['votes']
+        },
+        error: function (xhr, errmsg, err) {}
+      });
+    });
+  });
 </script>
 
 {% endblock content %}
