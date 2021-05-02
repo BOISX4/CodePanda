@@ -1,12 +1,13 @@
 {% extends "home/base.html" %}
 {% block content %}
+<h1>Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
 {% for question in questions %}
 <article class="media content-section">
     <img class="rounded-circle article-img" src="{{ question.user_ques.profile.image.url }}">
     <div class="media-body">
         <div class="article-metadata">
             <a class="mr-2 article-title" href="{% url 'question-detail' question.id %}">{{ question.title }}</a>
-            <small class="text-muted mt-2">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
+            <small class="text-muted mt-2">Posted by</small>
             <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
         </div>
 
@@ -25,11 +26,10 @@
                 </div>
 
                 <div class="row mt-3">
-                  <span id="votes" data-value="{{ answer.id }}"></span>
                     <div class="col-md-1 arrow-style">
-                        <a class="voting voteaction" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
-                        <span id="votes_for_answer">{{ answer.votes }}</span>
-                        <a class="voting voteaction" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
+                        <i class="fa fa-arrow-up"></i>
+                        <span>{{ answer.votes }}</span>
+                        <i class="fa fa-arrow-down"></i>
                     </div>
 
                     <article class="media answer-section col-md-11">
@@ -62,30 +62,6 @@
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
       {% endif %}
-{% endif %}
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('.voteaction').on("click", function (e) {
-      e.preventDefault();
-      var answerid = document.getElementById('votes').getAttribute('data-value');
-      var button = $(this).attr("value");
-      $.ajax({
-        type: 'POST',
-        url: {% url 'voteans' %},
-        data: {
-          answerid: answerid,
-          csrfmiddlewaretoken: '{{ csrf_token }}',          
-          action: 'votes',
-          button: button
-        },
-        success: function (json) {
-          document.getElementById("votes_for_answer").innerHTML = json['votes']
-        },
-        error: function (xhr, errmsg, err) {}
-      });
-    });
-  });
-</script>
-
+    {% endif %}
 {% endblock content %}
