@@ -7,7 +7,7 @@
     <div class="media-body">
         <div class="article-metadata">
             <a class="mr-2 article-title" href="{% url 'question-detail' question.id %}">{{ question.title }}</a>
-            <small class="text-muted mt-2">Posted by</small>
+            <small class="text-muted mt-2">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
             <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
         </div>
 
