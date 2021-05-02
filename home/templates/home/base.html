@@ -19,6 +19,9 @@
     <title>CodePanda</title>
     {% endif %}
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -35,6 +38,11 @@
                     <li><a href="{% url 'register' %}">Register</a></li>
                 {% endif %}
             </ul>
+            <form class = "d-flex" method="POST" action="{% url 'search-title' %}">
+                {% csrf_token %}
+                <input name="searched" class ="form-control me-2" type="search" placeholder="search title">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
         </nav>
     </header>
 
@@ -72,9 +80,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -82,7 +87,6 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-
 </body>
 
 </html>

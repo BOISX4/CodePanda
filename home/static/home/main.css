@@ -61,7 +61,7 @@ header {
 }
 
 .post-button:hover {
-  background-color: rgba(0, 136, 169, 0.8); */
+  background-color: rgba(0, 136, 169, 0.8);
 }
 
 /* h1, h2, h3, h4, h5, h6 {
@@ -178,4 +178,13 @@ a.btn.btn-primary {
   margin-bottom: 15px;
   border-radius: 20px;
   font-size: 12px;
+}
+
+.voting {
+  font-size: 20px;
+}
+
+.voting i:hover {
+  color: #428bca;
+  text-decoration: none;
 }

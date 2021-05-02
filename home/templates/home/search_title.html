@@ -1,0 +1,12 @@
+{% extends "home/base.html" %}
+{% block content %}
+    {% if searched %}
+        <h2>You searched for {{ searched }}</h2>
+        <br/>
+        {% for question in questions %}
+            <a href="{% url 'question-detail' question.id %}">{{ question }} -- {{ question.question }}</a> <br/>
+        {% endfor %}
+    {% else %}
+    <h2>You forgot to search for a title</h2>
+    {% endif %}
+{% endblock content %}
