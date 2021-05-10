@@ -49,4 +49,3 @@ class VoteQuestion(models.Model):
 
     def __str__(self):
         return self.user + " voted for " + str(question.id) + " as " + str(vote)
->>>>>>> Stashed changes
