@@ -11,6 +11,7 @@ class Question(models.Model):
     question = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     votes = models.IntegerField(default=0)
+    vote_ques = models.ManyToManyField(User, related_name='vote_ques', default=None, blank=True)
     user_ques = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     tags_ques = ArrayField(models.CharField(max_length=30), blank=True, null=True, verbose_name='Tags for Question')
 
@@ -37,3 +38,14 @@ class VoteAnswer(models.Model):
     answer = models.ForeignKey(Answer, related_name='answerid', on_delete=models.CASCADE, default=None, blank=True)
     user = models.ForeignKey(User, related_name='userid', on_delete=models.CASCADE, default=None, blank=True)
     vote = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user + " voted for " + str(answer.id) + " as " + str(vote)
+
+class VoteQuestion(models.Model):
+    question = models.ForeignKey(Question, related_name='questionid', on_delete=models.CASCADE, default=None, blank=True)
+    user = models.ForeignKey(User, related_name='userid1', on_delete=models.CASCADE, default=None, blank=True)
+    vote = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user + " voted for " + str(question.id) + " as " + str(vote)

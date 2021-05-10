@@ -11,6 +11,7 @@ urlpatterns = [
     path('question/new/', QuestionCreateView.as_view(), name='question-create'),
     path('search_title/', views.search_title, name='search-title'),
     path('about/', views.about, name='home-about'),
-    path('voteans/', views.voteans, name='voteans')
+    path('voteans/', views.voteans, name='voteans'),
+    path('voteques/',views.voteques, name = 'voteques')
 ]
 
