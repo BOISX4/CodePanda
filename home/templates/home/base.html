@@ -24,13 +24,12 @@
 
 </head>
 
-<body>
+<body class="container-bg">
     <header>
         <a href= "/"><img class="logo" src="{% static 'home/images/logo-cropped.png' %}" alt="logo"></a>
         <nav>
             <ul class="nav_links">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'question-create' %}"><button class="post-button">Post a Question</button></a><li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}
@@ -38,11 +37,11 @@
                     <li><a href="{% url 'register' %}">Register</a></li>
                 {% endif %}
             </ul>
-            <form class = "d-flex" method="POST" action="{% url 'search-title' %}">
+            <!-- <form class = "d-flex" method="POST" action="{% url 'search-title' %}">
                 {% csrf_token %}
                 <input name="searched" class ="form-control me-2" type="search" placeholder="search title">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </form>
+            </form> -->
         </nav>
     </header>
 

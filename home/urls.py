@@ -20,5 +20,6 @@ urlpatterns = [
     path('search_title/', views.search_title, name='search-title'),
     path('about/', views.about, name='home-about'),
     path('voteans/', views.voteans, name='voteans'),
+    path('voteques/',views.voteques, name = 'voteques')
 ]
 

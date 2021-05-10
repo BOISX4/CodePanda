@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, Http404
 from .models import Question
+from django.http import HttpResponse
+from .models import Question, VoteQuestion
 from .models import Answer, VoteAnswer
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
@@ -117,6 +119,8 @@ def voteans(request):
         button = request.POST.get('button')
         update = Answer.objects.get(id=id)
 
+        print(id)
+
         # Check if user has voted already
         if update.vote_ans.filter(id=request.user.id).exists():
 
@@ -188,6 +192,94 @@ def voteans(request):
                 update.save()
 
                 new = VoteAnswer(answer_id=id, user_id=request.user.id, vote=False)
+                new.save()
+
+            update.refresh_from_db()
+            votes = update.votes
+
+            return JsonResponse({'votes': votes})
+
+    pass
+
+def voteques(request):
+    
+    if request.POST.get('action') == 'votes':
+
+        id = int(request.POST.get('questionid'))
+        button = request.POST.get('button')
+        update = Question.objects.get(id=id)
+
+        # Check if user has voted already
+        if update.vote_ques.filter(id=request.user.id).exists():
+
+            # Get user current vote
+            q = VoteQuestion.objects.get(Q(question_id=id) & Q(user_id=request.user.id))
+            evote = q.vote
+
+            if evote == True:
+
+                # User clicks upvote again, remove vote
+                if button == 'upvote':
+                    update.votes = F('votes') - 1
+                    update.vote_ques.remove(request.user)
+                    update.save()
+                    update.refresh_from_db()
+                    votes = update.votes
+                    q.delete()
+                    
+                    return JsonResponse({'votes': votes})
+
+                if button == 'downvote':
+                    update.votes = F('votes') - 2
+                    update.save()
+                    q.vote = False
+                    q.save(update_fields=['vote'])
+                    update.refresh_from_db()
+                    votes = update.votes
+
+
+                    return JsonResponse({'votes': votes})
+
+            pass 
+
+            if evote == False:
+
+                # User clicks downvote again, remove vote
+                if button == 'downvote':
+                    update.votes = F('votes') + 1
+                    update.vote_ques.remove(request.user)
+                    update.save()
+                    update.refresh_from_db()
+                    votes = update.votes
+                    q.delete()
+                    
+                    return JsonResponse({'votes': votes})
+
+                if button == 'upvote':
+                    update.votes = F('votes') + 2
+                    update.save()
+                    q.vote = True
+                    q.save(update_fields=['vote'])
+                    update.refresh_from_db()
+                    votes = update.votes
+                    
+                    return JsonResponse({'votes': votes})
+
+        else:
+
+            if button == 'upvote':
+                update.votes = F('votes') + 1
+                update.vote_ques.add(request.user)
+                update.save()
+
+                new = VoteQuestion(question_id=id, user_id=request.user.id, vote=True)
+                new.save()
+            else:
+                update.votes = F('votes') - 1
+                update.vote_ques.add(request.user)
+                update.save()
+
+                new = VoteQuestion(question_id=id, user_id=request.user.id, vote=False)
                 new.save()
 
             update.refresh_from_db()
