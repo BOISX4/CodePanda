@@ -95,6 +95,8 @@ def voteans(request):
         button = request.POST.get('button')
         update = Answer.objects.get(id=id)
 
+        print(id)
+
         # Check if user has voted already
         if update.vote_ans.filter(id=request.user.id).exists():
 
