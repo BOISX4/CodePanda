@@ -17,7 +17,11 @@
     <div class="media-body">
         <div class="article-metadata">
             <a class="mr-2 article-title" href="{% url 'question-detail' question.id %}">{{ question.title }}</a>
-            <small class="text-muted mt-2">Posted by <a href="#">{{ question.user_ques | title }}</a></small>
+          {% if question.user_ques.id != user.id %}
+            <small class="text-muted mt-2">Posted by <a href="{% url 'panda-profile' question.user_ques.id %}">{{ question.user_ques | title }}</a></small>
+            {% else %}
+            <small class="text-muted mt-2">Posted by <a href="{% url 'profile' %}">{{ question.user_ques | title }}</a></small>
+            {% endif %}
             <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
         </div>
                 <div class="row mt-3">
@@ -39,7 +43,11 @@
             <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ answer.user_ans | title }}</a>
+                    {% if answer.user_ans.id != user.id %}
+                      <a class="mr-2" href="{% url 'panda-profile' answer.user_ans.id %}">{{ answer.user_ans | title }}</a>
+                    {% else %}
+                      <a class="mr-2" href="{% url 'profile' %}">{{ answer.user_ans | title }}</a>
+                    {% endif %}
                     <small class="text-muted date">{{ answer.date_posted | date:"F d, Y" }}</small>
                 </div>
 
