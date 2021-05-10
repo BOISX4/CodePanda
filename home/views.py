@@ -43,11 +43,25 @@ class UserPostListView(ListView):
     model = Question
     template_name ='home/user_posts.html'
     context_object_name = 'questions'
+    # queryset = Question.objects.filter(user_ques_id=1).order_by('-date_posted')
     paginate_by = 5
 
-    def get_query_set(self):
-        user = get_object_or_404(User,username=self.kwargs.get('username'))
-        return Question.objects.filter(author=user).order_by('-date_posted')
+    def get_queryset(self):
+        userid = self.request.user.id
+        # User.objects.get(username=the_username).pk
+        return Question.objects.filter(user_ques=userid).order_by('-date_posted')
+
+class PandaProfileView(ListView):
+    model = Question
+    template_name ='home/panda_profile.html'
+    context_object_name = 'questions'
+    # queryset = Question.objects.filter(user_ques_id=1).order_by('-date_posted')
+    paginate_by = 5
+
+    def get_queryset(self, *args, **kwargs):
+        userid = self.request.user.id
+        # User.objects.get(username=the_username).pk
+        return Question.objects.filter(user_ques=self.kwargs['pk']).order_by('-date_posted')
 
 class QuestionDetailView(DetailView):
     model = Question
