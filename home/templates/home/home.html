@@ -21,11 +21,10 @@
             <small class="text-muted date">{{ question.date_posted | date:"F d, Y" }}</small>
         </div>
                 <div class="row mt-3">
-                  <span id="votesq" data-value="{{ question.id }}"></span>
                     <div class="col-md-1 arrow-style">
-                        <a class="voting voteactionq" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
+                        <a class="voting voteactionq" data-value="{{ question.id }}" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
                         <span id="votes_for_question">{{ question.votes }}</span>
-                        <a class="voting voteactionq" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
+                        <a class="voting voteactionq" data-value="{{ question.id }}" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
                     </div>
                   <article class="media answer-section col-md-11">
                     <p class="article-content">{{ question.question }}</p>
@@ -109,8 +108,9 @@
 
     $('.voteactionq').on("click", function (e) {
       e.preventDefault();
-      var questionid = document.getElementById('votesq').getAttribute('data-value');
+      var questionid = $(this).attr("data-value")
       var button = $(this).attr("value");
+      var $that = $(this);
       $.ajax({
         type: 'POST',
         url: {% url 'voteques' %},
@@ -121,7 +121,7 @@
           button: button
         },
         success: function (json) {
-          document.getElementById("votes_for_question").innerHTML = json['votes']
+          $that.siblings('span').html(json.votes)
         },
         error: function (xhr, errmsg, err) {}
       });
