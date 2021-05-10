@@ -7,6 +7,7 @@ from django.urls import reverse
 
 # Create your models here.
 class Question(models.Model):
+    
     title = models.CharField(max_length=100)
     question = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
@@ -32,6 +33,8 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answer
+
+
 
 class VoteAnswer(models.Model):
     answer = models.ForeignKey(Answer, related_name='answerid', on_delete=models.CASCADE, default=None, blank=True)

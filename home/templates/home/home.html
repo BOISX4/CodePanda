@@ -15,31 +15,7 @@
             <a class="btn btn-primary" href="#" role="button">{{ tag }}</a>
         {% endfor %}
 
-        {% for answer in question.answer_set.all %}
-        <article class="media">
-            <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ answer.user_ans|title }}</a>
-                    <small class="text-muted date">{{ answer.date_posted | date:"F d, Y" }}</small>
-                </div>
-
-                <div class="row mt-3">
-                  <span id="votes" data-value="{{ answer.id }}"></span>
-                    <div class="col-md-1 arrow-style">
-                        <a class="voting voteaction" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
-                        <span id="votes_for_answer">{{ answer.votes }}</span>
-                        <a class="voting voteaction" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
-                    </div>
-
-                    <article class="media answer-section col-md-11">
-                        <pre class="prettyprint pp">{{ answer.answer }}</pre>
-                    </article>
-
-                </div>
-
-        </article>
-        {% endfor %}
+        
     </div>
 </article>
 
