@@ -20,23 +20,23 @@
             <a class="btn btn-primary" href="#" role="button">{{ tag }}</a>
         {% endfor %}
 
-        {% for answer in object.answer_set.all %}
+        {% for answer in question.answer_set.all %}
         <article class="media">
             <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ answer.user_ans|title }}</a>
+                    <a class="mr-2" href="#">{{ answer.user_ans | title }}</a>
                     <small class="text-muted date">{{ answer.date_posted | date:"F d, Y" }}</small>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-md-1 arrow-style">
-                        <i class="fa fa-arrow-up"></i>
-                        <span>{{ answer.votes }}</span>
-                        <i class="fa fa-arrow-down"></i>
+                        <a class="voting voteaction" data-value="{{ answer.id }}" value="upvote" role="button"><i class="fa fa-arrow-up"></i></a>
+                        <span class="votes_for_answer">{{ answer.votes }}</span>
+                        <a class="voting voteaction" data-value="{{ answer.id }}" value="downvote" role="button"><i class="fa fa-arrow-down"></i></a>
                     </div>
 
-                    <article class="media content-section col-md-10">
+                    <article class="media answer-section col-md-11">
                         <pre class="prettyprint pp">{{ answer.answer }}</pre>
                     </article>
 
@@ -46,4 +46,21 @@
         {% endfor %}
     </div>
 </article>
+<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
+                    Reply
+                </button>
+                <div class="collapse" id="replyBox{{comment.sno}}">
+                    <div class="card card-body my-2">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="comment">Post a reply </label>
+                                <input type="text" class="form-control" name="comment" placeholder="Enter comment here">
+                                <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                            </div>
+                            <input type="hidden" name="postSno" value="{{post.sno}}">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
 {% endblock content %}

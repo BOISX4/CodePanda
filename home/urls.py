@@ -3,8 +3,10 @@ from .views import QuestionListView , QuestionDetailView, QuestionCreateView, Qu
 from . import views
 
 
+
 urlpatterns = [
     path('', QuestionListView.as_view(), name='home'),
+    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('question/<int:pk>/', QuestionDetailView.as_view(), name='question-detail'),
     path('panda/<int:pk>/', PandaProfileView.as_view(), name='panda-profile'),
     path('question/<int:pk>/update/', QuestionUpdateView.as_view(), name='question-update'),

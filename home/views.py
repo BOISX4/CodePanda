@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse, Http404
+from .models import Question
 from django.http import HttpResponse
 from .models import Question, VoteQuestion
 from .models import Answer, VoteAnswer
@@ -8,6 +10,7 @@ from django.contrib.auth.models import User
 from django.db.models import F
 from django.db.models import Q
 from django.http import JsonResponse
+from .forms import AnswerForm
 
 
 def search_title(request):
@@ -17,12 +20,6 @@ def search_title(request):
         return render(request, 'home/search_title.html', {'searched': searched,'questions':questions})
     else:
         return render(request, 'home/search_title.html', {})
-
-
-    
-
-
-
 
 def home(request):
     context = {
@@ -63,6 +60,7 @@ class PandaProfileView(ListView):
         # User.objects.get(username=the_username).pk
         return Question.objects.filter(user_ques=self.kwargs['pk']).order_by('-date_posted')
 
+
 class QuestionDetailView(DetailView):
     model = Question
 
@@ -97,6 +95,7 @@ class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == question.user_ques:
             return True
         return False
+
 
 def about(request):
     return render(request, 'home/about.html', {'title': 'about'})

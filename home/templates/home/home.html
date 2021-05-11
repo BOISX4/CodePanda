@@ -37,7 +37,6 @@
         {% for tag in question.tags_ques %}
             <a class="btn btn-primary" href="#" role="button">{{ tag }}</a>
         {% endfor %}
-
         {% for answer in question.answer_set.all %}
         <article class="media">
             <img class="rounded-circle article-img" src="{{  answer.user_ans.profile.image.url  }}">
