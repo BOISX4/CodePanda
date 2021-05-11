@@ -46,31 +46,6 @@ class UserPostListView(ListView):
         user = get_object_or_404(User,username=self.kwargs.get('username'))
         return Question.objects.filter(author=user).order_by('-date_posted')
 
-def QuestionDetailView(request, _id):
-    try:
-        question = Question.objects.get(id = _id)
-        answer = Answer.objects.filter(answer_for_ques = question)
-    except BlogModel.DoesNotExist:
-        raise Http404("Data doesnt exist")
-
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            resp = Answer(answer=form.cleaned_data['answer'],
-                answer_for_ques=question)
-            resp.save()
-            return redirect('question/<int:pk>/')
-        else:
-            form = AnswerForm()
-
-    context = {
-            'question':question,
-            'form':form,
-            'answer':answer,
-        }
-
-    return render(request,'question/<int:pk>/',context)
-
 
 class QuestionDetailView(DetailView):
     model = Question

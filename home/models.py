@@ -25,11 +25,11 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    answer = models.TextField()
+    answer_for_ques = models.ForeignKey(Question, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
+    answer = models.TextField()
     votes = models.IntegerField(default=0)
     vote_ans = models.ManyToManyField(User, related_name='vote_ans', default=None, blank=True)
-    answer_for_ques = models.ForeignKey(Question, on_delete=models.CASCADE)
     user_ans = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
